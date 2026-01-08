@@ -93,7 +93,7 @@ The real work happens inside the loop.
 - Live decision sessions  
 
 👉 **Join on Skool:**  
-https://www.skool.com/inner-loop
+https://www.skool.com/inner-loop-1911
 
 ---
 

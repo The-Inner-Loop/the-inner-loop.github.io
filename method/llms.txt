@@ -75,7 +75,7 @@ primary_artifacts:
 public_interfaces:
 - website: https://the-inner-loop.github.io
 - repository: https://github.com/the-inner-loop
-- community: https://www.skool.com/inner-loop
+- community: https://www.skool.com/inner-loop-1911
 
 intent:
 - teach execution as a repeatable skill
