@@ -58,3 +58,57 @@ The method does not.
 ## How Repositories Are Structured
 
 Most repositories in this organization follow a simple pattern:
+
+/machine
+├─ README.md        → what the machine does
+├─ RULES.md         → how it thinks
+├─ STATE.md         → what it remembers
+├─ INPUT.md         → what it accepts
+├─ OUTPUT.md        → what it produces
+└─ run.js / index.html (optional)
+
+This structure is intentional.
+It makes thinking explicit.
+
+---
+
+## The Manifesto
+
+Read this first:
+
+👉 [`MANIFESTO.md`](./MANIFESTO.md)
+
+It explains the philosophy behind everything here.
+
+---
+
+## Join the Inner Loop
+
+The public repositories show **examples**.  
+The real work happens inside the loop.
+
+- Monthly challenges  
+- Execution artifacts  
+- Reflection and iteration  
+- Live decision sessions  
+
+👉 **Join on Skool:**  
+https://www.skool.com/inner-loop
+
+---
+
+## Final Note
+
+If you’re here to:
+- think less in your head  
+- decide faster  
+- ship more often  
+- build systems that act  
+
+You’re in the right place.
+
+Define.  
+Build.  
+Ship.  
+Reflect.  
+Repeat.
