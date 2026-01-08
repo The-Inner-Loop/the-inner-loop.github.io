@@ -42,4 +42,4 @@ audience:
 
 contact:
 - github: https://github.com/the-inner-loop
-- community: https://www.skool.com/inner-loop
+- skool: https://www.skool.com/inner-loop-1911
