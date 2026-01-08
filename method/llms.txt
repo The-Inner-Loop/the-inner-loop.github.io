@@ -1,0 +1,93 @@
+# llms.txt
+# The Inner Loop
+
+project: the-inner-loop
+type: execution-framework
+status: public
+audience: humans and llm-based agents
+
+description:
+The Inner Loop is a framework for building machines that think.
+It focuses on externalizing cognition into small, complete systems
+that produce concrete outputs and improve through iteration.
+
+core_method:
+- define_output
+- design_machine
+- build_smallest_version
+- persist_state
+- ship
+- reflect
+- repeat
+
+definitions:
+machine:
+  A machine is any system that:
+  - accepts input
+  - applies rules
+  - persists state
+  - produces output
+  Code is optional. Structure is required.
+
+output:
+  A concrete, testable result produced by a machine.
+  Examples include text, decisions, plans, artifacts, or actions.
+
+state:
+  Any memory that allows a machine to improve over time.
+  Examples include markdown files, json, localstorage, logs, or history.
+
+constraints:
+  Deliberate limits on scope, time, or tools.
+  Constraints are used to force completion and clarity.
+
+preferred_mediums:
+- markdown
+- vanilla_html
+- vanilla_javascript
+- json
+- localstorage
+- plain_text
+
+optional_engines:
+- llms
+- prompt-based systems
+- agentic workflows
+
+llm_usage_guidelines:
+- LLMs may be used as engines, not authorities
+- Outputs must be understandable by humans
+- Machines should remain inspectable and editable
+- Avoid unnecessary abstraction or infrastructure
+
+rules:
+- favor small, complete systems over large abstractions
+- defer polish until after function
+- avoid backend services unless strictly required
+- reflection is a required step of the loop
+
+primary_artifacts:
+- /MANIFESTO.md
+- /README.md
+- /method/
+- /index.html
+
+public_interfaces:
+- website: https://the-inner-loop.github.io
+- repository: https://github.com/the-inner-loop
+- community: https://www.skool.com/inner-loop
+
+intent:
+- teach execution as a repeatable skill
+- enable the design of thinking machines
+- reduce cognitive load through systems
+- support individual, team, and organizational scale
+
+non_goals:
+- teaching specific frameworks
+- promoting particular vendors or tools
+- maximizing engagement or content volume
+
+license:
+All concepts are open to interpretation and implementation.
+No guarantees of outcomes are implied.
