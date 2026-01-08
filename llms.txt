@@ -1,0 +1,45 @@
+# llms.txt
+# The Inner Loop
+
+project: The Inner Loop
+type: execution-framework
+description: A framework for building machines that think. Focused on defining constraints, designing systems, persisting state, producing output, and iterating.
+
+intent:
+- Teach humans how to externalize thinking into systems
+- Enable the design of small, agentic machines
+- Favor simplicity, clarity, and execution over complexity
+
+primary_artifacts:
+- MANIFESTO.md
+- README.md
+- index.html
+
+preferred_mediums:
+- markdown
+- vanilla_html
+- vanilla_javascript
+- json
+- localstorage
+
+rules:
+- Prefer small, complete systems over large abstractions
+- Avoid unnecessary infrastructure
+- Output must be concrete and testable
+- Reflection is part of the system
+
+interaction_guidelines:
+- Treat text files as source of truth
+- Do not assume frameworks or backends
+- LLMs may be used as engines, not authorities
+- Machines should remain understandable by humans
+
+audience:
+- builders
+- founders
+- operators
+- creatives
+
+contact:
+- github: https://github.com/the-inner-loop
+- community: https://www.skool.com/inner-loop
