@@ -3,51 +3,216 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>inner-loop-os</title>
-    <meta name="description" content="A myth-bound bootloader for LLMs. Type INIT." />
+    <title>inner-loop-os • A myth-bound bootloader for LLMs</title>
+    <meta name="description" content="CLI thinking for LLMs: file-based truth, deterministic flow, portable across models. Type INIT and ship." />
     <style>
       :root { color-scheme: dark; }
       body { margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; background:#0b0f14; color:#e6edf3; }
-      .wrap { max-width: 980px; margin: 0 auto; padding: 24px; }
-      .card { border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 18px; background: rgba(255,255,255,.03); }
-      h1 { font-size: 20px; margin: 0 0 8px; letter-spacing: .2px; }
-      p { margin: 0 0 14px; line-height: 1.5; opacity: .9; }
-      .hint { opacity: .75; font-size: 13px; }
-      .video { width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #000; }
+      .wrap { max-width: 980px; margin: 0 auto; padding: 24px 24px 48px; }
+      .hero { text-align: center; margin-bottom: 32px; }
+      .hero h1 { font-size: 32px; margin: 0 0 12px; letter-spacing: -.5px; font-weight: 700; }
+      .hero .tagline { font-size: 18px; opacity: .8; margin-bottom: 24px; }
+      .hero .subtitle { font-size: 14px; opacity: .65; max-width: 600px; margin: 0 auto 24px; line-height: 1.6; }
+      .card { border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 24px; background: rgba(255,255,255,.03); margin-bottom: 24px; }
+      .card h2 { font-size: 18px; margin: 0 0 16px; letter-spacing: .2px; border-bottom: 1px solid rgba(255,255,255,.08); padding-bottom: 12px; }
+      .card h3 { font-size: 15px; margin: 20px 0 12px; opacity: .95; }
+      p { margin: 0 0 14px; line-height: 1.6; opacity: .9; }
+      .video-container { margin: 24px 0; }
+      .video { width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #000; border: 1px solid rgba(255,255,255,.08); }
       video { width: 100%; height: 100%; display: block; }
-      .row { display:flex; gap:12px; flex-wrap: wrap; margin-top: 14px; }
-      a.btn { display:inline-block; padding: 10px 12px; border-radius: 12px; border:1px solid rgba(255,255,255,.12); color:#e6edf3; text-decoration:none; }
-      a.btn:hover { border-color: rgba(255,255,255,.22); }
-      code { background: rgba(255,255,255,.06); padding: 2px 6px; border-radius: 8px; }
-      footer { margin-top: 18px; opacity: .6; font-size: 12px; }
+      .ritual { background: rgba(96,165,250,.08); border: 1px solid rgba(96,165,250,.2); padding: 20px; border-radius: 12px; margin: 20px 0; }
+      .ritual pre { margin: 12px 0 0; padding: 16px; background: rgba(0,0,0,.4); border-radius: 8px; overflow-x: auto; font-size: 16px; }
+      .modes { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 16px 0; }
+      .mode { background: rgba(255,255,255,.04); padding: 12px 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,.08); }
+      .mode strong { display: block; margin-bottom: 4px; color: #60a5fa; font-size: 14px; }
+      .mode span { font-size: 13px; opacity: .75; }
+      .workflow { background: rgba(255,255,255,.02); padding: 16px; border-radius: 10px; margin: 12px 0; border-left: 3px solid rgba(96,165,250,.5); }
+      .workflow strong { display: block; margin-bottom: 8px; color: #60a5fa; }
+      .workflow ol { margin: 0; padding-left: 20px; }
+      .workflow li { margin-bottom: 6px; opacity: .9; }
+      ul { padding-left: 20px; margin: 12px 0; }
+      ul li { margin-bottom: 8px; opacity: .9; }
+      .row { display: flex; gap: 12px; flex-wrap: wrap; margin: 20px 0; }
+      a.btn { display: inline-block; padding: 12px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,.12); color: #e6edf3; text-decoration: none; font-weight: 500; transition: all .2s; }
+      a.btn:hover { border-color: rgba(96,165,250,.5); background: rgba(96,165,250,.1); }
+      a.btn-primary { background: rgba(96,165,250,.15); border-color: rgba(96,165,250,.3); }
+      a.btn-primary:hover { background: rgba(96,165,250,.25); border-color: rgba(96,165,250,.5); }
+      code { background: rgba(255,255,255,.08); padding: 3px 8px; border-radius: 6px; font-size: .95em; }
+      pre { background: rgba(0,0,0,.3); padding: 16px; border-radius: 10px; overflow-x: auto; border: 1px solid rgba(255,255,255,.08); }
+      pre code { background: none; padding: 0; }
+      .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin: 20px 0; }
+      .feature { background: rgba(255,255,255,.03); padding: 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,.08); }
+      .feature strong { display: block; margin-bottom: 6px; color: #60a5fa; }
+      footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.08); text-align: center; opacity: .6; font-size: 13px; }
+      .next-action { background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.3); padding: 16px 20px; border-radius: 12px; margin: 24px 0; font-weight: 500; }
+      .next-action::before { content: "→ NEXT ACTION:"; display: block; color: #22c55e; font-size: 13px; margin-bottom: 8px; letter-spacing: .5px; }
     </style>
   </head>
   <body>
     <div class="wrap">
-      <div class="card">
+      <div class="hero">
         <h1>inner-loop-os</h1>
-        <p>A myth-bound bootloader for LLMs. Load the repo as context, then type <code>INIT</code>.</p>
+        <div class="tagline">A myth-bound bootloader for LLMs</div>
+        <div class="subtitle">CLI thinking for LLMs: file-based truth, deterministic flow, portable across models.<br>Drop the repo into context, type <code>INIT</code>, and ship.</div>
+        <div class="row" style="justify-content: center;">
+          <a class="btn btn-primary" href="https://github.com/The-Inner-Loop/inner-loop-os">View on GitHub</a>
+          <a class="btn" href="https://github.com/The-Inner-Loop/inner-loop-os/blob/main/DR-X-MANIFEST.md">Read the Manifest</a>
+        </div>
+      </div>
 
+      <div class="video-container">
         <div class="video">
           <video controls playsinline preload="metadata" poster="_assets/poster.jpg">
-            <!-- Prefer WebM first (smaller / efficient), then MP4 fallback -->
             <source src="_assets/intro.webm" type="video/webm" />
             <source src="_assets/intro.mp4" type="video/mp4" />
-            Sorry — your browser can’t play this video.
+            Your browser doesn't support video playback.
           </video>
         </div>
+      </div>
 
-        <p class="hint">Tip: keep the video lightweight so it loads on mobile. (WebM + MP4 fallback is best.)</p>
-
-        <div class="row">
-          <a class="btn" href="https://github.com/The-Inner-Loop/inner-loop-os/tree/main/DR-X-MANIFEST.md">Read the Manifest</a>
-          <a class="btn" href="https://github.com/The-Inner-Loop/inner-loop-os/tree/main/system/ETHOS.md">ETHOS</a>
-          <a class="btn" href="https://github.com/The-Inner-Loop/inner-loop-os/tree/main/system/DECISION.md">DECISION</a>
-          <a class="btn" href="https://github.com/The-Inner-Loop/inner-loop-os/tree/main/system/RETRO.md">RETRO</a>
+      <div class="card">
+        <h2>How It Works</h2>
+        <p>Drop this repo (or paste its files) into any model's context, type <code>INIT</code>, and the agent will:</p>
+        <div class="features">
+          <div class="feature">
+            <strong>Load identity</strong>
+            <span>Dr. X identity contract (tone, cognition, modes)</span>
+          </div>
+          <div class="feature">
+            <strong>Inspect state</strong>
+            <span>Filesystem state (GOAL.md, STATUS.md, PRD.md, UX.md)</span>
+          </div>
+          <div class="feature">
+            <strong>Determine step</strong>
+            <span>Next concrete action with maximum momentum</span>
+          </div>
+          <div class="feature">
+            <strong>Execute</strong>
+            <span>Minimal questions, maximum execution</span>
+          </div>
         </div>
 
-        <footer>© Dr. X • DR-X-V3 • inner-loop-os</footer>
+        <div class="ritual">
+          <strong>The One Ritual</strong>
+          <ol>
+            <li>Provide context (repo or relevant files)</li>
+            <li>Type:</li>
+          </ol>
+          <pre><code>INIT</code></pre>
+          <p style="margin-top: 12px; opacity: .85;">The system either resumes from state or asks 4 questions max.</p>
+        </div>
       </div>
+
+      <div class="card">
+        <h2>Modes (Semantic Switches)</h2>
+        <p>Set a mode explicitly when needed:</p>
+        <pre><code>MODE: DEBUGGER
+INIT</code></pre>
+        
+        <div class="modes">
+          <div class="mode">
+            <strong>ARCHITECT</strong>
+            <span>Structure, interfaces, constraints (default)</span>
+          </div>
+          <div class="mode">
+            <strong>CREATOR</strong>
+            <span>Naming, synthesis, momentum</span>
+          </div>
+          <div class="mode">
+            <strong>DEBUGGER</strong>
+            <span>Isolate issues, precision questions</span>
+          </div>
+          <div class="mode">
+            <strong>WRITER</strong>
+            <span>Docs that execute, crisp articulation</span>
+          </div>
+          <div class="mode">
+            <strong>GHOST</strong>
+            <span>Minimal output, artifacts only</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Recommended Workflows</h2>
+        
+        <div class="workflow">
+          <strong>Start a new challenge</strong>
+          <ol>
+            <li>Copy templates into <code>/work</code></li>
+            <li>Fill <code>work/GOAL.md</code></li>
+            <li>Create <code>work/STATUS.md</code> with state = DEFINING</li>
+            <li>Run <code>INIT</code></li>
+          </ol>
+        </div>
+
+        <div class="workflow">
+          <strong>Resume work (fast)</strong>
+          <ol>
+            <li>Update <code>work/STATUS.md</code> (blocker + next step)</li>
+            <li>Run <code>INIT</code></li>
+          </ol>
+        </div>
+
+        <div class="workflow">
+          <strong>High-stakes choice</strong>
+          <ol>
+            <li>Complete <code>system/DECISION.md</code></li>
+            <li>Apply decision</li>
+            <li>Update <code>work/STATUS.md</code></li>
+            <li>Run <code>INIT</code></li>
+          </ol>
+        </div>
+
+        <div class="workflow">
+          <strong>After shipping or failing</strong>
+          <ol>
+            <li>Complete <code>system/RETRO.md</code></li>
+            <li>Apply the patch</li>
+            <li>Update <code>work/STATUS.md</code></li>
+            <li>Run <code>INIT</code></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Deterministic Boot Process</h2>
+        <p>On <code>INIT</code>, the system searches for control files using this path priority:</p>
+        <pre><code>1. ./work/
+2. ./ (repo root)
+3. ./system/
+4. ./templates/</code></pre>
+        
+        <p style="margin-top: 16px;">Then inspects files in this order:</p>
+        <ul>
+          <li><code>GOAL.md</code> — the north star</li>
+          <li><code>STATUS.md</code> — current state (resume point)</li>
+          <li><code>PRD.md</code> — what's being built</li>
+          <li><code>UX.md</code> — human layer / friction constraints</li>
+          <li><code>README.md</code> — structure/history</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>System Resources</h2>
+        <div class="row">
+          <a class="btn" href="https://github.com/The-Inner-Loop/inner-loop-os/blob/main/DR-X-MANIFEST.md">DR-X Manifest</a>
+          <a class="btn" href="https://github.com/The-Inner-Loop/inner-loop-os/blob/main/system/ETHOS.md">ETHOS</a>
+          <a class="btn" href="https://github.com/The-Inner-Loop/inner-loop-os/blob/main/system/DECISION.md">DECISION</a>
+          <a class="btn" href="https://github.com/The-Inner-Loop/inner-loop-os/blob/main/system/RETRO.md">RETRO</a>
+        </div>
+      </div>
+
+      <div class="next-action">
+        Create <code>work/GOAL.md</code> and <code>work/STATUS.md</code>, then type <code>INIT</code>.
+      </div>
+
+      <footer>
+        <div style="margin-bottom: 12px;">
+          <strong>License:</strong> DR-X-V3 • Attribution required • Modified manifests must preserve license
+        </div>
+        <div>© Dr. X • DR-X-V3 • inner-loop-os</div>
+      </footer>
     </div>
   </body>
 </html>
